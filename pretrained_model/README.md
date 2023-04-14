@@ -1,5 +1,7 @@
 # pre-trained Roost model
 
+
+
 formation energy
 - 모든 MP composition lowest formation energy 로 학습
 - ensemble 10
