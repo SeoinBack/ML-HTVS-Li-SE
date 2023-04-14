@@ -18,7 +18,7 @@ import parmap
 
 from htvs_module import substitution, comp_to_form, comp_to_ele
 
-mpr = MPRester('WgPaLVntnoS3X3tdlT')
+mpr = MPRester('Your API')
 mg.__version__
 
 data = mpr.query({"elements":'Li','nelements':{ "$gte" : 3 , "$lte" : 4}}, properties=['material_id',"pretty_formula",'elements','formula','cif'])
