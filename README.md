@@ -5,11 +5,5 @@
 
 ## How to use
 ```
-python 1_genration.py
-
-python 2_composition_based_screening.py
-
-python 3_1_structure_based_screening.py
-
-python 3_2_structure_based_screening.py
+python htvs_main.py --task [generation, composition, structure, clustering]
 ```
