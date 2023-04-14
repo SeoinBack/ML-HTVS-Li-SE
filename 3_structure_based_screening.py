@@ -10,7 +10,7 @@ from joblib import Memory
 
 from ast import literal_eval
 
-mpr = MPRester('WgPaLVntnoS3X3tdlT')
+mpr = MPRester('Your API')
 
 
 ref_df = pd.read_csv('./new_order_data/01_1_all_Li_material_from_MP.csv',index_col='material_id')
