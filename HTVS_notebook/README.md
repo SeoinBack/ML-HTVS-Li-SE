@@ -1,1 +1,0 @@
-HTVS screening process example
