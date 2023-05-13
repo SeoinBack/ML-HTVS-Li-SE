@@ -8,8 +8,6 @@ We have made available a collection of Jupyter Notebooks that were utilized in t
 
 Please note that in the “03_5_h_clustering.ipynb” Notebook, only a partial dataset was used due to limitations on data upload.
 
-For machine learning regressions, one can refer to ROOST github (https://github.com/CompRhys/roost).
-
 # Dependancy
 - Python3 3.8.5
 - Numpy 1.21.4
@@ -20,5 +18,5 @@ For machine learning regressions, one can refer to ROOST github (https://github.
 ## External sources
   1. Base structures from https://materialsproject.org/
   2. Machine learning model to predict formation energy and bandgap from https://doi.org/10.1038/s41467-020-19964-7
-      - Instructions for the supervised machine learning model is described in https://github.com/CompRhys/roost
+      - For machine learning regressions, one can refer to ROOST github (https://github.com/CompRhys/roost).
   4. Li-ion conductivity with m-XRD data from https://doi.org/10.1038/s41467-019-13214-1
