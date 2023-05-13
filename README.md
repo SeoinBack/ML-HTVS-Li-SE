@@ -20,4 +20,4 @@ Please note that in the “03_5_h_clustering.ipynb” Notebook, only a partial d
   1. Prototypical structures were taken from https://materialsproject.org/
   2. ROOST model was used to predict formation energy, energy above the convex hull and bandgap 
     (Paper: https://doi.org/10.1038/s41467-020-19964-7, Github: https://github.com/CompRhys/roost)
-  4. m-XRD based clustering was used to choose high Li-ion conductive materials (https://doi.org/10.1038/s41467-019-13214-1)
+  4. m-XRD based clustering was used to choose appropriate high Li-ion conductive candidate materials for DFT validations (https://doi.org/10.1038/s41467-019-13214-1)
