@@ -89,7 +89,7 @@ def structure_substitution(row,ref_df): # rowDataFramempid, reference structure,
     poscar = struc.to(fmt='poscar')
     return [index, poscar]
 
-def get_window_range(argcomp,open_el='Li',allowpmu=False,trypreload=True): # trypredload : pickle 일 때 True, MP 일 때 False
+def get_window_range(argcomp,open_el='Li',allowpmu=False,trypreload=True): # trypredload : pickle data -> True, MP data -> False
     comp = Composition(argcomp)
     entry = VirtualEntry.from_composition(comp)
     oe = open_el
@@ -105,25 +105,25 @@ def substitution(df,sub_elements):
     for j in tqdm(range(len(df))):
         temp_list = df['formula'][j]
         temp_range = list(range(int(len(temp_list)/2))) 
-        del temp_range[temp_list.index('Li')] # Li 가 아닌 element 의 index 선정 ex) ['Li', 'Cd', 'Cu', 1.0, 2.0, 1.0] -> [1, 2]
+        del temp_range[temp_list.index('Li')] # not Li element ex) ['Li', 'Cd', 'Cu', 1.0, 2.0, 1.0] -> [1, 2]
         
         for i in temp_range:
             temp_range2 = temp_range[:]
             temp_list2 = temp_list[:]
             temp_list2[i]= 'S'
-            temp_range2.remove(i) # S 로 먼저 하나 치환, 치환한 index 제외
+            temp_range2.remove(i) # substitution to S
             for k in temp_range2:
                 temp_list3 = temp_list2[:]
                 temp_range2.remove(k) 
                 for s1 in sub_elements:
-                    temp_list3[k] = s1 # 나머지 28가지로 치환
+                    temp_list3[k] = s1
 
-                    if temp_range2: # 4원소인 경우 바로 k 있는 for문 2번 돌아감
+                    if temp_range2: # quaternary
                         for s2 in sub_elements:
                             temp_list4 = temp_list3[:]
                             temp_list4[temp_range2[0]] = s2
-                            substituted_list.append(temp_list4+[df['material_id'][j]]) # 나머지 28가지로 치환
-                    else: # 3원소인 경우
+                            substituted_list.append(temp_list4+[df['material_id'][j]]) 
+                    else: # ternary
                         temp_list5 = temp_list3[:]
                         substituted_list.append(temp_list5+[df['material_id'][j]])
                         
@@ -162,7 +162,7 @@ def e_above_hull_calculator(comp_and_form_energy, mp=False):
     return [argcomp,e_above_hull]
 
 def get_PD_entries_new(chemsys,trypreload):
-        chemsys = list(set(chemsys)) # 중복 제거
+        chemsys = list(set(chemsys)) 
 
         if trypreload:
             chemsys.sort()
@@ -178,19 +178,19 @@ def get_PD_entries_new(chemsys,trypreload):
 
 
 class VirtualEntry(ComputedEntry):
-    def __init__(self, composition, energy, name=None): # class 멤버변수 composition, energy, name
+    def __init__(self, composition, energy, name=None): # class variable: composition, energy, name
         super(VirtualEntry, self).__init__(Composition(composition), energy)
         if name:
             self.name = name
 
     @classmethod
-    def from_composition(cls, comp, energy=0, name=None): # 입력한 comp 로 class 초기화
+    def from_composition(cls, comp, energy=0, name=None): 
         return cls(Composition(comp), energy, name=name)
 
 
 
     @property
-    def chemsys(self): # 해당 class 의 composition 에 포함된 원소 종류 str list 를 return
+    def chemsys(self): 
         return [_.symbol for _ in self.composition.elements]
 
     def get_PD_entries(self, sup_el=None, exclusions=None, trypreload=False):
@@ -202,15 +202,14 @@ class VirtualEntry(ComputedEntry):
         :return: all related entries to construct phase diagram.
         """
 
-        chemsys = self.chemsys + sup_el if sup_el else self.chemsys # 현재 chemsys + open element (oe 가 없을 경우 chemsys + chemsys) = str list
-        chemsys = list(set(chemsys)) # 중복 제거
+        chemsys = self.chemsys + sup_el if sup_el else self.chemsys 
+        chemsys = list(set(chemsys)) 
 
         if trypreload:
             entries = self.get_PD_entries_from_pickle(chemsys) 
         else:
-#             entries = self.get_PD_entries_from_MP(chemsys) # chemsys 의 elements 로 만들 수 있는 entries 를 MP 에서 가져옴 --> 왜 안되는지 알 수 없음
             entries = MPRester().get_entries_in_chemsys(chemsys)
-        entries.append(self) # MP 에서 가져온 entries 에 현재 class component 추가 --> 그래서 MP 에 없는 구조도 가능
+        entries.append(self) 
         if exclusions:
             entries = [e for e in entries if e.name not in exclusions]
             entries = [e for e in entries if e.entry_id not in exclusions]
@@ -253,11 +252,10 @@ class VirtualEntry(ComputedEntry):
 
     def get_phase_evolution_profile(self, oe, allowpmu=False, entries=None,exclusions=None, trypreload=False):
         pd_entries = entries if entries else self.get_PD_entries(sup_el=[oe],exclusions=exclusions,trypreload=trypreload) 
-        # MP 에서 class 의 component 가 가진 element 로 만들 수 있는 모든 entries list 가져옴, self 포함
-        offset = 30 if allowpmu else 0 # defalt = 0 이유는 모름
+        offset = 30 if allowpmu else 0 
 #         for e in pd_entries: # entries list 에 있는 각 물질에 대해
-#             if e.composition.is_element and oe in e.composition.keys(): # 그 물질이 단일 원소 물질들 이고, open element 물질을 포함 하면
-#                 e.correction += offset * e.composition.num_atoms # correction 값을 바꿔줌 : 근데 지금 offset=0 이라서 의미 없음
+#             if e.composition.is_element and oe in e.composition.keys(): 
+#                 e.correction += offset * e.composition.num_atoms 
         pd = PhaseDiagram(pd_entries)
         evolution_profile = pd.get_element_profile(oe, self.composition.reduced_composition)
         el_ref = evolution_profile[0]['element_reference']
