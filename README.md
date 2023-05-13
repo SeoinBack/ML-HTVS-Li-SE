@@ -4,7 +4,7 @@
 
 
 # Explanations
-We have made available a collection of Jupyter Notebooks that were utilized in this project. These Notebooks can be easily followed in sequential order. The associated data has been uploaded and can be accessed in the “data” folder, and all the necessary modules used can be found in the “htvs_module” folder.
+We have made available a collection of Jupyter Notebooks that were utilized in this project. These Notebooks can be easily followed in sequential order. The associated data has been uploaded and can be accessed in the “data” folder, and all the necessary modules can be found in the “htvs_module” folder.
 
 Please note that in the “03_5_h_clustering.ipynb” Notebook, only a partial dataset was used due to limitations on data upload.
 
