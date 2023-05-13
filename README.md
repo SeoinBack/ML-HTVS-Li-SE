@@ -12,7 +12,7 @@ Please note that in the “03_5_h_clustering.ipynb” Notebook, only a partial d
 - Python3 3.8.5
 - Numpy 1.21.4
 - Pandas 1.4.0
-- Pymatgen 2020.9.08
+- Pymatgen 2020.09.08
 - Scikit-learn 1.1.1
 
 ## External sources
