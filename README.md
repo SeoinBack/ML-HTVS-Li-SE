@@ -6,10 +6,6 @@
 # Explanations
 Uploaded notebook contain only example results. 
 
-## Excluded parts
-  1. Machine learning prediction / Trained model
-  2. DFT/AIMD calculation / results
-
 ## External sources
   1. Base structures from https://materialsproject.org/
   2. Machine learning model to predict formation energy and bandgap from https://doi.org/10.1038/s41467-020-19964-7
