@@ -6,6 +6,13 @@
 # Explanations
 Uploaded notebook contain only example results. 
 
+# Dependancy
+- Python3 3.8.5
+- Numpy 1.21.4
+- Pandas 1.4.0
+- Pymatgen 2022.0.16
+- Scikit-learn 1.1.1
+
 ## External sources
   1. Base structures from https://materialsproject.org/
   2. Machine learning model to predict formation energy and bandgap from https://doi.org/10.1038/s41467-020-19964-7
